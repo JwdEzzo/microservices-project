@@ -15,10 +15,10 @@ public class SchoolService {
     @Autowired
     private SchoolRepository schoolRepository;
 
-    public School createSchool(CreateSchoolRequestDto createSchoolRequestDto) {
+    public void createSchool(CreateSchoolRequestDto createSchoolRequestDto) {
         School school = new School();
         school.setName(createSchoolRequestDto.getName());
-        return schoolRepository.save(school);
+        schoolRepository.save(school);
     }
     
     public List<School> getAllSchools() {
@@ -29,13 +29,13 @@ public class SchoolService {
         return schoolRepository.findById(id).orElse(null);
     }
 
-    public School updateSchool(Long id, String name) {
+    public void updateSchool(Long id, String name) {
         School school = schoolRepository.findById(id).orElse(null);
         if (school == null) {
-            return null;
+            throw new RuntimeException("School not found");
         }
         school.setName(name);
-        return schoolRepository.save(school);
+        schoolRepository.save(school);
     }
 
     public void deleteSchool(Long id) {

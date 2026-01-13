@@ -18,49 +18,54 @@ import com.school.school_microservice.model.School;
 import com.school.school_microservice.service.SchoolService;
 
 @RestController
-@RequestMapping("/schools")
+@SuppressWarnings("CallToPrintStackTrace")
+@RequestMapping("/api/schools")
 public class SchoolController {
     
     @Autowired
     private SchoolService schoolService;
 
     @PostMapping
-    public ResponseEntity<?> createSchool(@RequestBody CreateSchoolRequestDto createSchoolRequestDto) {
+    public ResponseEntity<Void> createSchool(@RequestBody CreateSchoolRequestDto createSchoolRequestDto) {
         try {
-            School school = schoolService.createSchool(createSchoolRequestDto);
-            return ResponseEntity.ok(school);
+            schoolService.createSchool(createSchoolRequestDto);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllSchools() {
+    public ResponseEntity<List<School>> getAllSchools() {
         try {
             List<School> schools = schoolService.getAllSchools();
             return ResponseEntity.ok(schools);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSchoolById(@PathVariable Long id) {
+    public ResponseEntity<School> getSchoolById(@PathVariable Long id) {
         try {
             School school = schoolService.getSchoolById(id);
             return ResponseEntity.ok(school);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSchool(@PathVariable Long id, @RequestBody String name) {
+    public ResponseEntity<Void> updateSchool(@PathVariable Long id, @RequestBody String name) {
         try {
-            School school = schoolService.updateSchool(id, name);
-            return ResponseEntity.ok(school);
+            schoolService.updateSchool(id, name);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         }
     }
     
