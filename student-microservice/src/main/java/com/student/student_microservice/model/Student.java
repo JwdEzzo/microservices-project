@@ -1,5 +1,6 @@
 package com.student.student_microservice.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,4 +21,6 @@ public class Student {
 
     private String name;
 
+    @Column(name="school_id")
+    private Long schoolId;
 }
