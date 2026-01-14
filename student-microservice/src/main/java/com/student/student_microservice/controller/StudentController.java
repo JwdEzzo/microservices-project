@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.student.dto.request.CreateStudentRequestDto;
+import com.student.student_microservice.dto.request.CreateStudentRequestDto;
 import com.student.student_microservice.model.Student;
 import com.student.student_microservice.service.StudentService;
 

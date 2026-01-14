@@ -1,4 +1,4 @@
-package com.student.dto.request;
+package com.student.student_microservice.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
