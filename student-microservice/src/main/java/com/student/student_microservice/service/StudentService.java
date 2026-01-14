@@ -2,7 +2,7 @@ package com.student.student_microservice.service;
 
 import org.springframework.stereotype.Service;
 
-import com.student.dto.request.CreateStudentRequestDto;
+import com.student.student_microservice.dto.request.CreateStudentRequestDto;
 import com.student.student_microservice.model.Student;
 import com.student.student_microservice.repository.StudentRepository;
 
