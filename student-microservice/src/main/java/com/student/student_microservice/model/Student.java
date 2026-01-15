@@ -14,13 +14,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @Column(name="school_id")
-    private Long schoolId;
+    @Column(name = "classroom_id")
+    private Long classroomId;
+
 }

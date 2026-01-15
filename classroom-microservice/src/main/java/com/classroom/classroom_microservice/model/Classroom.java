@@ -24,4 +24,8 @@ public class Classroom {
    @Column(unique = true)
    private String code;
 
+   @NotBlank(message = "School ID is required")
+   @Column(name = "school_id")
+   private Long schoolId;
+
 }
