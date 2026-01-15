@@ -18,7 +18,7 @@ import com.student.student_microservice.service.StudentService;
 @SuppressWarnings("CallToPrintStackTrace")
 @RequestMapping("/api/students")
 public class StudentController {
- 
+
     private final StudentService studentService;
 
     public StudentController(StudentService studentService) {

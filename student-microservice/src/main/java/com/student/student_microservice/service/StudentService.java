@@ -8,7 +8,7 @@ import com.student.student_microservice.repository.StudentRepository;
 
 @Service
 public class StudentService {
-    
+
     private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
@@ -37,6 +37,5 @@ public class StudentService {
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
-
 
 }
