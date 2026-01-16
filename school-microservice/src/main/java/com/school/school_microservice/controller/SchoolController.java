@@ -21,7 +21,7 @@ import com.school.school_microservice.service.SchoolService;
 @SuppressWarnings("CallToPrintStackTrace")
 @RequestMapping("/api/schools")
 public class SchoolController {
-    
+
     @Autowired
     private SchoolService schoolService;
 
@@ -68,7 +68,7 @@ public class SchoolController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSchool(@PathVariable Long id) {
         try {
@@ -77,5 +77,5 @@ public class SchoolController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }    
+    }
 }

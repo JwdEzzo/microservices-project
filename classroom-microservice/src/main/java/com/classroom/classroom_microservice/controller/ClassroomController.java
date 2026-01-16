@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.classroom.classroom_microservice.dto.request.CreateClassroomRequestDto;
+import com.classroom.classroom_microservice.dto.request.CreateUpdateClassroomRequestDto;
 import com.classroom.classroom_microservice.model.Classroom;
 import com.classroom.classroom_microservice.service.ClassroomService;
 
@@ -30,7 +30,7 @@ public class ClassroomController {
    }
 
    @PostMapping
-   public ResponseEntity<Void> createClassroom(@Valid @RequestBody CreateClassroomRequestDto requestDto) {
+   public ResponseEntity<Void> createClassroom(@Valid @RequestBody CreateUpdateClassroomRequestDto requestDto) {
       try {
          classroomService.createClassroom(requestDto);
          return ResponseEntity.status(HttpStatus.CREATED).body(null);

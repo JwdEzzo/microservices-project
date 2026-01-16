@@ -5,22 +5,30 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.classroom.classroom_microservice.dto.request.CreateClassroomRequestDto;
+import com.classroom.classroom_microservice.dto.request.CreateUpdateClassroomRequestDto;
 import com.classroom.classroom_microservice.model.Classroom;
+import com.classroom.classroom_microservice.openfeign.SchoolServiceClient;
 import com.classroom.classroom_microservice.repository.ClassroomRepository;
 
 @Service
 public class ClassroomService {
 
    private final ClassroomRepository classroomRepository;
+   private final SchoolServiceClient schoolServiceClient;
 
-   public ClassroomService(ClassroomRepository classroomRepository) {
+   public ClassroomService(ClassroomRepository classroomRepository, SchoolServiceClient schoolServiceClient) {
       this.classroomRepository = classroomRepository;
+      this.schoolServiceClient = schoolServiceClient;
    }
 
-   public void createClassroom(CreateClassroomRequestDto requestDto) {
+   public void createClassroom(CreateUpdateClassroomRequestDto requestDto) {
       Classroom classroom = new Classroom();
+      Long schoolId = schoolServiceClient.getSchoolById(requestDto.getSchoolId()).getId();
+      if (schoolId == null) {
+         throw new RuntimeException("School not found");
+      }
       classroom.setCode(requestDto.getCode());
+      classroom.setSchoolId(schoolId);
       classroomRepository.save(classroom);
    }
 
@@ -36,12 +44,17 @@ public class ClassroomService {
       return classroomRepository.findByCode(code);
    }
 
-   public void updateClassroom(Long id, String code) {
+   public List<Classroom> getClassroomsBySchoolId(Long schoolId) {
+      return classroomRepository.findBySchoolId(schoolId);
+   }
+
+   public void updateClassroom(Long id, CreateUpdateClassroomRequestDto requestDto) {
       Classroom classroom = classroomRepository.findById(id).orElse(null);
       if (classroom == null) {
          throw new RuntimeException("Classroom not found");
       }
-      classroom.setCode(code);
+      classroom.setCode(requestDto.getCode());
+      classroom.setSchoolId(schoolServiceClient.getSchoolById(requestDto.getSchoolId()).getId());
       classroomRepository.save(classroom);
    }
 

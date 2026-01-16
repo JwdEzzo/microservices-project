@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,8 @@ public class Classroom {
    @Column(unique = true)
    private String code;
 
-   @NotBlank(message = "School ID is required")
+   @NotNull(message = "School ID cannot be null")
+   @Min(value = 1, message = "School ID must be greater than 0")
    @Column(name = "school_id")
    private Long schoolId;
 
